@@ -27,24 +27,18 @@ const ShopsPage = () => {
 	console.log(shopsLoadingStatus);
 
 	useEffect(() => {
-		// console.log("hello1");
 		dispatch(fetchShops());
-		// console.log("hello2");
-		// eslint-disable-next-line
 	}, []);
 
 	const renderShops = (data, status) => {
-		console.log('item data', data)
 		if (status === "loading") {
 			return <div>Loading elements</div>
 		} else if (status === "error") {
 			return <div>Error loading</div>
 		}
 		if (data && data.length > 0) {
-			console.log("data : ", data, data.length);
 			return data.map(
 				({ _id, ...props }) => {
-					console.log("data map : ", props);
 					return (
 						<ShopsItem key={_id} {...props} onsetSelectedShop={onsetSelectedShop} />
 					)
@@ -82,28 +76,19 @@ const GoodsList = ({ shopName }) => {
 	const goodsList = useSelector(goodsSelector.selectAll);
 	const dispatch = useDispatch();
 
-	console.log(goodsList);
-	console.log(goodsLoadingStatus);
-
 	useEffect(() => {
-		// console.log("hello1");
 		dispatch(fetchGoods(shopName));
-		// console.log("hello2");
-		// eslint-disable-next-line
 	}, [shopName]);
 
 	const renderGoods = (data, status) => {
-		console.log('item data', data)
 		if (status === "loading") {
 			return <div>Loading elements</div>
 		} else if (status === "error") {
 			return <div>Error loading</div>
 		}
 		if (data && data.length > 0) {
-			console.log("data : ", data, data.length);
 			return data.map(
 				({ _id, ...props }) => {
-					console.log("data map : ", _id, props);
 					return (
 						<GoodsItem key={_id} id={_id} {...props} />
 					)
@@ -126,7 +111,6 @@ const GoodsItem = ({ id, title, price, shopName, url }) => {
 	const dispatch = useDispatch();
 
 	const onAddItemToCart = (props) => {
-		console.log(`selectedGoods.length: ${selectedGoods.length}`)
 		if (selectedGoods.length > 0 && selectedGoods[0].shopName.toLowerCase() !== shopName.toLowerCase()) {
 			alert('You cannot choose a product while the ordered products are present from another store! Please clear the order.');
 			return;

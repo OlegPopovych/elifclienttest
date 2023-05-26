@@ -5,9 +5,26 @@ import { Routes, Route, Outlet, Link, NavLink, useParams, useNavigate, useSearch
 const HeaderLayout = () => {
 	return (
 		<>
-			<nav className={styles.body}>
-				<NavLink to={`/`} className={styles.navLink}>Shops</NavLink>
-				<NavLink to={`/carts`} className={styles.navLink}>Carts</NavLink>
+			<nav className={styles.body} >
+				<NavLink to={`/`}
+					className={styles.navLink}
+					style={({ isActive, isPending }) => {
+						return {
+							fontWeight: isActive ? "bold" : "",
+							color: isPending ? "red" : "black",
+						};
+					}}
+
+				>Shops</NavLink>
+				<NavLink to={`/carts`}
+					className={styles.navLink}
+					style={({ isActive, isPending }) => {
+						return {
+							fontWeight: isActive ? "bold" : "",
+							color: isPending ? "red" : "black",
+						};
+					}}
+				>Carts</NavLink>
 			</nav>
 			<Outlet />
 		</>
