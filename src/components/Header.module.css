@@ -1,0 +1,9 @@
+.navLink {
+	margin: 5px;
+}
+
+.body {
+	height: 30px;
+	display: flex;
+	align-items: center;
+}

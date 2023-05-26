@@ -1,0 +1,53 @@
+.body {
+	background-color: lightblue;
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.shopsMenu {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	width: 20%;
+	background-color: rgb(203, 163, 240);
+	align-items: center;
+}
+
+.shopsItem {
+	width: 90%;
+	height: 40px;
+	border: 2px solid rgba(126, 139, 0, 0.867);
+	border-radius: 5px;
+	margin: 5px;
+	padding: 0px 0px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-size: 20px;
+}
+
+.cartItem {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	width: 200px;
+	border-radius: 5px;
+	border: 3px solid rgba(216, 108, 1, 0.2);
+	margin: 20px;
+	padding: 10px;
+}
+
+.cartsList {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 80%;
+}
+
+.cartImg {
+	width: 100%;
+}
