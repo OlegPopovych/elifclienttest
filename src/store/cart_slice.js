@@ -43,22 +43,7 @@ const cartSlice = createSlice({
 				state.items.splice(indexCart, 1);
 				state.totalQuantity -= 1;
 			}
-
 		},
-
-		// updateItemFromCart: (state, action) => {
-		// 	const indexCart = state.items.findIndex((item) => item.id === action.payload.id);
-		// 	const updatedCart = {
-		// 		id: action.payload.id,
-		// 		title: action.payload.title,
-		// 		price: action.payload.price,
-		// 		shopName: action.payload.shopName,
-		// 		url: action.payload.url,
-		// 	}
-		// 	state.items.splice(indexCart, 1, updatedCart);
-
-
-		// }
 	}
 });
 
@@ -71,9 +56,6 @@ export const finalPrice = createSelector(
 	(items) => {
 		console.log('items: ', items);
 		let summ = 0;
-		// if (items.length < 0) {
-		// 	return 0;
-		// }
 		for (let i = 0; i < items.length; i++) {
 			console.log('items.finalPrice: ', items[i].totalPrice);
 			summ += items[i].totalPrice;
@@ -81,17 +63,6 @@ export const finalPrice = createSelector(
 		return summ;
 	}
 )
-
-
-
-
-
-
-
-
-
-
-
 
 export const cartActions = cartSlice.actions;
 

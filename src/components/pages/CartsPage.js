@@ -163,6 +163,5 @@ const CartItem = (props) => {
 				</button>
 			</div>
 		</div>
-
 	)
 }

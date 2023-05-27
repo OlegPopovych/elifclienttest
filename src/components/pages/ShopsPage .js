@@ -7,7 +7,7 @@ import { fetchShops } from '../../store/shops_slice';
 import { fetchGoods } from '../../store/goods_slice';
 import { goodsSelector } from '../../store/goods_slice';
 import { addItemToCart } from '../../store/cart_slice';
-import { itemsSelector, totalQuantity } from '../../store/cart_slice';
+import { itemsSelector} from '../../store/cart_slice';
 
 const ShopsPage = () => {
 	const { shopsLoadingStatus } = useSelector(state => state.shops);

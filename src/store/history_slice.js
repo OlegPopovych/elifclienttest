@@ -1,13 +1,12 @@
-import { createSlice, createAsyncThunk, createEntityAdapter, createSelector } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
 
 const historyAdapter = createEntityAdapter({
 	selectId: (book) => book._id
 });
 
-const initialState = historyAdapter.getInitialState({  //адаптер створює початковий стейт
+const initialState = historyAdapter.getInitialState({
 	historyLoadingStatus: 'idle'
 });
-
 
 export const fetchHistory = createAsyncThunk(
 	'history/fetchHistory',
@@ -42,7 +41,6 @@ const historySlice = createSlice({
 			})
 			.addCase(fetchHistory.rejected, (state, action) => {
 				state.historyLoadingStatus = "error";
-				// console.log(action.payload.errorMessage)
 			})
 			.addDefaultCase(() => { })
 	}

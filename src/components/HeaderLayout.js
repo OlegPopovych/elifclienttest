@@ -1,6 +1,5 @@
 import styles from './Header.module.css';
-import { Routes, Route, Outlet, Link, NavLink, useParams, useNavigate, useSearchParams, } from 'react-router-dom';
-
+import { Outlet, NavLink } from 'react-router-dom';
 
 const HeaderLayout = () => {
 	return (
@@ -14,7 +13,6 @@ const HeaderLayout = () => {
 							color: isPending ? "red" : "black",
 						};
 					}}
-
 				>Shops</NavLink>
 				<NavLink to={`/carts`}
 					className={styles.navLink}
@@ -37,7 +35,6 @@ const HeaderLayout = () => {
 			</nav>
 			<Outlet />
 		</>
-
 	);
 }
 

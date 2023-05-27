@@ -1,4 +1,4 @@
-import { Routes, Route, NavLink, Navigate, useNavigate, useLocation, } from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 
 import CartsPage from './components/pages/CartsPage';
 import ShopsPage from './components/pages/ShopsPage ';
@@ -9,7 +9,6 @@ import './App.css';
 
 function App() {
 	return (
-
 		<Routes>
 			<Route path="/" element={<HeaderLayout />} >
 
@@ -27,15 +26,6 @@ function App() {
 
 			</Route >
 		</Routes >
-
-
-
-		// <div className="App">
-		// 	<header className="App-header">
-		// 		<CartsPage />
-		// 		<ShopsPage />
-		// 	</header>
-		// </div>
 	);
 }
 
