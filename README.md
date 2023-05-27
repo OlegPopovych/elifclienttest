@@ -10,6 +10,5 @@
 
 Увійти в папку з додатком через консоль та ввести команду *npm run start*, додаток запуститься у вікні вашого браузера.
 
-REACT_APP_API_ENDPOINT = http://localhost:8081/
-
-REACT_APP_API_ENDPOINT = https://elifservertest.herokuapp.com/
+	REACT_APP_API_ENDPOINT = http://localhost:8081/
+	REACT_APP_API_ENDPOINT = https://elifservertest.herokuapp.com/

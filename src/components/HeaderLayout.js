@@ -25,6 +25,15 @@ const HeaderLayout = () => {
 						};
 					}}
 				>Carts</NavLink>
+				<NavLink to={`/history`}
+					className={styles.navLink}
+					style={({ isActive, isPending }) => {
+						return {
+							fontWeight: isActive ? "bold" : "",
+							color: isPending ? "red" : "black",
+						};
+					}}
+				>History</NavLink>
 			</nav>
 			<Outlet />
 		</>

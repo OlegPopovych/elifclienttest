@@ -1,6 +1,6 @@
 import styles from './ShopsPage.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import { globalizedSelectors } from '../../store/shops_slice';
 import { fetchShops } from '../../store/shops_slice';
@@ -9,7 +9,6 @@ import { goodsSelector } from '../../store/goods_slice';
 import { addItemToCart } from '../../store/cart_slice';
 import { itemsSelector, totalQuantity } from '../../store/cart_slice';
 
-
 const ShopsPage = () => {
 	const { shopsLoadingStatus } = useSelector(state => state.shops);
 	const shopList = useSelector(globalizedSelectors.selectAll);
@@ -17,20 +16,15 @@ const ShopsPage = () => {
 
 	const [selectedShop, setSelectedShop] = useState('');
 
-	const onsetSelectedShop = (data) => {
-		console.log(data.toLowerCase());
-		setSelectedShop(data.toLowerCase());
-	}
-
-	console.log(selectedShop);
-	console.log(shopList);
-	console.log(shopsLoadingStatus);
-
 	useEffect(() => {
 		dispatch(fetchShops());
 	}, []);
 
-	const renderShops = (data, status) => {
+	const onsetSelectedShop = (data) => {
+		setSelectedShop(data.toLowerCase());
+	}
+
+	const renderShops = useCallback((data, status) => {
 		if (status === "loading") {
 			return <div>Loading elements</div>
 		} else if (status === "error") {
@@ -44,7 +38,7 @@ const ShopsPage = () => {
 					)
 				})
 		}
-	}
+	}, [shopList, shopsLoadingStatus]);
 
 	const elements = renderShops(shopList, shopsLoadingStatus);
 
@@ -54,14 +48,11 @@ const ShopsPage = () => {
 				{elements}
 			</div>
 			<GoodsList shopName={selectedShop} />
-
 		</div>
-
 	);
 }
 
 export default ShopsPage;
-
 
 const ShopsItem = ({ name, onsetSelectedShop }) => {
 	return (
@@ -116,17 +107,13 @@ const GoodsItem = ({ id, title, price, shopName, url }) => {
 			return;
 		}
 		dispatch(addItemToCart(props));
-
 	}
-
 	return (
 		<div className={styles.cartItem}>
-			<img className={styles.cartImg} src="./lemonade.jpg" alt="img" />
-			<p>{`${title}`}</p>
-			<p>{`Price: ${price}`}</p>
-			<button
-				// onClick={() => dispatch(addItemToCart({ id, title, price, shopName, url }))}
-				onClick={() => onAddItemToCart({ id, title, price, shopName, url })}
+			<img className={styles.cartImg} src={`${process.env.REACT_APP_API_ENDPOINT}images/${url}.jpg`} alt="img" />
+			<p className={styles.title}>{`${title}`}</p>
+			<p>{`Price: ${price} $`}</p>
+			<button onClick={() => onAddItemToCart({ id, title, price, shopName, url })}
 			>Add to Cart</button>
 		</div>
 	)

@@ -20,15 +20,38 @@ const CartsPage = () => {
 	const [error, setError] = useState("");
 	const [successMessage, setSuccessMessage] = useState('');
 
+	const [requiredmessage, setRequiredmessage] = useState('');
+
 	const SubmitHandler = (e) => {
 		e.preventDefault();
 		if (!total) {
 			alert("Корзина пуста, виберіть товар");
 			return;
 		}
+		if (!name) {
+			setRequiredmessage(true);
+			let Requiredmessage = setTimeout(() => setRequiredmessage(false), 3000);
+			return;
+		}
+		if (!email) {
+			setRequiredmessage(true);
+			let Requiredmessage = setTimeout(() => setRequiredmessage(false), 3000);
+			return;
+		}
+		if (!phone) {
+			setRequiredmessage(true);
+			let Requiredmessage = setTimeout(() => setRequiredmessage(false), 3000);
+			return;
+		}
+		if (!address) {
+			setRequiredmessage(true);
+			let Requiredmessage = setTimeout(() => setRequiredmessage(false), 3000);
+			return;
+		}
+
 		setIsSubmitting(true);
 
-		const order = { name, email, phone, address, shopList };
+		const order = { name, email, phone, total, address, shopList };
 
 		setError("");
 
@@ -49,7 +72,7 @@ const CartsPage = () => {
 					setError(genericErrorMessage);
 					if (response.status === 400) {
 						setError("Error inserting matches!");
-					} 
+					}
 				} else {
 					handleSuccessMessage();
 				}
@@ -75,7 +98,7 @@ const CartsPage = () => {
 				})
 		} else {
 			return (
-				<><p>Кошик порожній, наповніть його!</p></>
+				<p>The basket is empty, fill it!</p>
 			)
 		}
 	}
@@ -83,7 +106,7 @@ const CartsPage = () => {
 	const elements = renderShopList(shopList);
 
 	return (
-		<form onSubmit={SubmitHandler}>
+		<div >
 			<div className={styles.body}>
 				<div className={styles.userData}>
 					<p>Enter your data</p>
@@ -98,7 +121,7 @@ const CartsPage = () => {
 
 					<label htmlFor="address">Address:</label>
 					<input required type="text" id="address" value={address} onChange={(e) => setAddress(e.target.value)} />
-
+					{requiredmessage ? <p className={styles.warning}>Please, enter your name</p> : null}
 				</div>
 				<div className={styles.cartsList}>
 					{elements}
@@ -108,15 +131,14 @@ const CartsPage = () => {
 				{successMessage}
 				{error}
 				<p className={styles.footerItem}>{`Quantity: ${Quantity}`}</p>
-				<p className={styles.footerItem}>{`Total price: ${total}`}</p>
-				<button type="submit" disabled={isSubmitting}>Submit</button>
+				<p className={styles.footerItem}>{`Total price: ${total} $`}</p>
+				<button type="submit" onClick={SubmitHandler} disabled={isSubmitting}>Submit</button>
 			</footer>
-		</form>
+		</div>
 
 	);
 }
 export default CartsPage;
-
 
 const CartItem = (props) => {
 	const { id, title, price, shopName, url, quantity, totalPrice } = props;
@@ -125,7 +147,7 @@ const CartItem = (props) => {
 	return (
 		<div className={styles.cartItemWrapper}>
 			<div className={styles.cartItem}>
-				<img className={styles.cartImg} src="./lemonade.jpg" alt="img" />
+				<img className={styles.cartImg} src={`${process.env.REACT_APP_API_ENDPOINT}images/${url}.jpg`} alt="img" />
 				<p>{title}</p>
 			</div>
 			<div>
@@ -134,7 +156,7 @@ const CartItem = (props) => {
 					onClick={() => dispatch(addItemToCart({ id, title, price, shopName, url }))}>+
 				</button>
 				<p>{quantity}</p>
-				<p>{`Total: ${totalPrice}`}</p>
+				<p>{`Total: ${totalPrice} $`}</p>
 				<button
 					className={styles.btn}
 					onClick={() => dispatch(removeItemFromCart(id))}>-

@@ -3,6 +3,7 @@ import { Routes, Route, NavLink, Navigate, useNavigate, useLocation, } from 'rea
 import CartsPage from './components/pages/CartsPage';
 import ShopsPage from './components/pages/ShopsPage ';
 import HeaderLayout from './components/HeaderLayout';
+import HistoryPage from './components/pages/HistoryPage';
 
 import './App.css';
 
@@ -19,7 +20,11 @@ function App() {
 				<Route path="/carts" element={
 					<CartsPage />
 				} />
-				
+
+				<Route path="/history" element={
+					<HistoryPage />
+				} />
+
 			</Route >
 		</Routes >
 

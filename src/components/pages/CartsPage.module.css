@@ -45,6 +45,11 @@
 	width: 100%;
 }
 
+.warning {
+	color: red;
+	font-size: 20px;
+}
+
 .cartItemWrapper {
 	display: flex;
 	align-items: center;
