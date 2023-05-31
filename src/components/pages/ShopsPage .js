@@ -1,13 +1,14 @@
 import styles from './ShopsPage.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, createContext } from "react";
 
 import { globalizedSelectors } from '../../store/shops_slice';
 import { fetchShops } from '../../store/shops_slice';
 import { fetchGoods } from '../../store/goods_slice';
 import { goodsSelector } from '../../store/goods_slice';
-import { addItemToCart } from '../../store/cart_slice';
-import { itemsSelector} from '../../store/cart_slice';
+
+import { useLocalStorage } from '../../hooks/local.hook';
+import useLocalStorageData from '../../hooks/local.hook';
 
 const ShopsPage = () => {
 	const { shopsLoadingStatus } = useSelector(state => state.shops);
@@ -98,22 +99,23 @@ const GoodsList = ({ shopName }) => {
 
 
 const GoodsItem = ({ id, title, price, shopName, url }) => {
-	const selectedGoods = useSelector(itemsSelector);
-	const dispatch = useDispatch();
+	const { onAddLocalStorageHandler } = useLocalStorage();
+	let cartsInLocalStorage = useLocalStorageData();
 
 	const onAddItemToCart = (props) => {
-		if (selectedGoods.length > 0 && selectedGoods[0].shopName.toLowerCase() !== shopName.toLowerCase()) {
+		if (cartsInLocalStorage.length > 0 && cartsInLocalStorage[0].shopName.toLowerCase() !== shopName.toLowerCase()) {
 			alert('You cannot choose a product while the ordered products are present from another store! Please clear the order.');
 			return;
 		}
-		dispatch(addItemToCart(props));
+		onAddLocalStorageHandler(props);
 	}
 	return (
 		<div className={styles.cartItem}>
 			<img className={styles.cartImg} src={`${process.env.REACT_APP_API_ENDPOINT}images/${url}.jpg`} alt="img" />
 			<p className={styles.title}>{`${title}`}</p>
 			<p>{`Price: ${price} $`}</p>
-			<button onClick={() => onAddItemToCart({ id, title, price, shopName, url })}
+			<button
+				onClick={() => onAddItemToCart({ id, title, price, shopName, url })}
 			>Add to Cart</button>
 		</div>
 	)

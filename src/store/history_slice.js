@@ -19,9 +19,7 @@ export const fetchHistory = createAsyncThunk(
 				"Content-Type": "application/json",
 			},
 		})
-		console.log(res);
-		const toSend = await res.json()
-		console.log(`history data: ${toSend}`)
+		const toSend = await res.json();
 		return toSend;
 	}
 )

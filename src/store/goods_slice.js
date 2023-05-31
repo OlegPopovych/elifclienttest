@@ -20,9 +20,7 @@ export const fetchGoods = createAsyncThunk(
 				"Content-Type": "application/json",
 			},
 		})
-		console.log(res);
 		const toSend = await res.json()
-		console.log(`shops data: ${toSend}`)
 		return toSend;
 	}
 )
